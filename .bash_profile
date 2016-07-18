@@ -7,7 +7,21 @@ C_CYAN="\[\033[36m\]"
 C_LIGHTPURPLE="\[\033[1;35m\]"
 C_MAGENTA="\[\033[35m\]"
 
-export PS1="$C_LIGHTGREEN\u $C_CYAN\W $C_DARKGRAY:$C_DEFAULT "
+# Git branch in prompt.
+
+parse_git_branch() {
+
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+
+}
+
+# Git autocomplete
+
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+
+export PS1="$C_LIGHTGREEN\u $C_CYAN\W$C_MAGENTA\$(parse_git_branch) $C_DARKGRAY:$C_DEFAULT "
 
 #aliases
 
