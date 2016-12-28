@@ -39,11 +39,33 @@ alias openhosts="open /etc/hosts -a TextMate"
 
 #shortcuts
 alias w="cd ~/WebRoot"
+alias ll='ls -Al'
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
-#mate
-export EDITOR='/usr/local/bin/mate -w'
+#editor
+export EDITOR='subl -w'
+export GIT_EDITOR='subl -w'
+
+#tmux
+function t() {
+ if [ $# -eq 0 ]; then
+   TERM=xterm-256color tmux
+ else
+   TERM=xterm-256color tmux new-session -s $1
+ fi
+}
+alias tma='tmux attach -t'
+alias tml='tmux ls'
+
+#utility
+alias ea='subl ~/.bash_profile && source ~/.bash_profile'
+
+#git
+alias gco='git checkout'
+alias gst='git status'
+alias gbr='git branch'
+alias gl='git log --graph --pretty=format":%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'
 
 #NVM
 export NVM_HOME="$HOME/.nvm"
